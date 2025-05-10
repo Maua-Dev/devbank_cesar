@@ -4,7 +4,7 @@ from ..enums.item_type_enum import ItemTypeEnum
 import re
 
 
-class Usuario:
+class User:
     name: str
     agency: str
     account: str
