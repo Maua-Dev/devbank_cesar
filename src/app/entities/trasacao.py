@@ -39,7 +39,7 @@ class Transacao:
             return (False, "Transaction type is required")
         if type(transaction_type) != str:
             return (False, "Transaction type must be a string")
-        if transaction_type != ("Saque") or transaction_type != ("Deposito"):
+        if transaction_type != ("Saque") or transaction_type != ("Depósito"):
             return (False, "Transaction type must be a deposit or a withdraw")
         return (True, "")
     
@@ -60,9 +60,17 @@ class Transacao:
         if timestamp < 0:
             return(False, "At time balance must be a positive value")
         return (True, "")
+    
+    @staticmethod
+    def validate_at__time_balance(at_time_balance: float) -> Tuple[bool, float]:
+        if type(at_time_balance) != float:
+            return (False, "At time balance must be a number")
+        if at_time_balance < 0:
+            return(False, "At time balance must be a positive value")
+        return (True, "")
 
 def __eq__(self,other):
-    return self.name == other.name and self.agency == other.agency and self.account == other.account and self.current_balance == other.current_balance
+    return self.transaction_type == other.transaction_type and self.value == other.value and self.timestamp == other.timestamp and self.at_time_balance == other.at_time_balance
     
 def __repr__(self):
-    return f"Item(name={self.name}, agency={self.agency}, account={self.account}, current_balance={self.current_balance})"
+    return f"Transacao(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, at_time_balance={self.at_time_balance})"
