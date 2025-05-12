@@ -11,7 +11,7 @@ class Transaction:
     timestamp: float
     
 
-    def __init__(self, transaction_type: TransactionTypeEnum=None, value: float=None, current_balance: float=None, timestamp: float=None):
+    def __init__(self, transaction_type: TransactionTypeEnum=None, value: float=None, current_balance: float=None, timestamp: float=0):
         validation_transaction_type = self.validate_transaction_type(transaction_type)
         if validation_transaction_type[0] is False:
             raise ParamNotValidated("transaction_type", validation_transaction_type[1])
@@ -67,16 +67,16 @@ class Transaction:
             return(False, "Current balance must be a positive value")
         return (True, "")
 
-def to_dict(self):
-    return {
-        "name": self.transaction_type,
-        "price": self.value,
-        "item_type": self.timestamp,
-        "admin_permission": self.current_balance
-    }
+    def to_dict(self):
+        return {
+            "name": self.transaction_type,
+            "price": self.value,
+            "item_type": self.timestamp,
+            "admin_permission": self.current_balance
+        }
 
-def __eq__(self,other):
-    return self.transaction_type == other.transaction_type and self.value == other.value and self.timestamp == other.timestamp and self.current_balance == other.current_balance
+    def __eq__(self,other):
+        return self.transaction_type == other.transaction_type and self.value == other.value and self.timestamp == other.timestamp and self.current_balance == other.current_balance
     
-def __repr__(self):
-    return f"Transacao(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, at_time_balance={self.current_balance})"
+    def __repr__(self):
+        return f"Transacao(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, at_time_balance={self.current_balance})"
