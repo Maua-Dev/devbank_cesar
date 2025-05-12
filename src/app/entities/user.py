@@ -54,11 +54,11 @@ class User:
     @staticmethod
     def validate_account(account: str) -> Tuple[bool, str]:
         if account is None:
-            return (False, "Agency is required")
+            return (False, "Account is required")
         if type(account) != str:
-            return (False, "Agency must be a string")
+            return (False, "Account must be a string")
         if account !=  re.match("^([0-9]{5}\-[0-9]{1})$", account):
-            return (False, "Agency must follow xxxxx-x format")
+            return (False, "Account must follow xxxxx-x format")
         return (True, "")
     @staticmethod
     def validate_current_balance(current_balance: float) -> Tuple[bool, float]:
