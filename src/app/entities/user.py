@@ -57,7 +57,7 @@ class User:
             return (False, "Account is required")
         if type(account) != str:
             return (False, "Account must be a string")
-        if account !=  re.match("^([0-9]{5}\-[0-9]{1})$", account):
+        if not re.match("^([0-9]{5}\-[0-9]{1})$", account):
             return (False, "Account must follow xxxxx-x format")
         return (True, "")
     @staticmethod

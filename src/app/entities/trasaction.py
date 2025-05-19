@@ -37,7 +37,7 @@ class Transaction:
     def validate_transaction_type(transaction_type: str) -> Tuple[bool, str]:
         if transaction_type is None:
             return (False, "Transaction type is required")
-        if transaction_type != (TransactionTypeEnum):
+        if type(transaction_type) != TransactionTypeEnum:
             return (False, "Transaction type must be a deposit or a withdraw")
         return (True, "")
     
@@ -69,14 +69,14 @@ class Transaction:
 
     def to_dict(self):
         return {
-            "name": self.transaction_type,
-            "price": self.value,
-            "item_type": self.timestamp,
-            "admin_permission": self.current_balance
+            "transaction_type": self.transaction_type,
+            "value": self.value,
+            "timestamp": self.timestamp,
+            "current_balance": self.current_balance
         }
 
     def __eq__(self,other):
         return self.transaction_type == other.transaction_type and self.value == other.value and self.timestamp == other.timestamp and self.current_balance == other.current_balance
     
     def __repr__(self):
-        return f"Transacao(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, at_time_balance={self.current_balance})"
+        return f"Transaction(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, current_balance={self.current_balance})"
