@@ -137,13 +137,7 @@
 from fastapi import FastAPI, HTTPException
 from mangum import Mangum
 
-from .errors.entity_errors import ParamNotValidated
-
-from src.app.repo.user_repostory_mock import User_repository
-
-from src.app.repo.transaction_repository_mock import Trasaction_repository
-
-from src.app.enviroments_dev_bank import Environments
+from .enviroments_dev_bank import Environments
 
 app = FastAPI()
 user_repo = Environments.get_user_repo()

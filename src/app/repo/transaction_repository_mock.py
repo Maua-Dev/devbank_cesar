@@ -1,5 +1,5 @@
 from typing import Dict, Optional, List, Tuple
-from app.entities.user import User
+from src.app.entities.user import User
 from src.app.entities.trasaction import Transaction
 
 class Trasaction_repository:
