@@ -1,7 +1,7 @@
 from typing import Dict, Optional, List, Tuple
-from src.app.entities.user import User
-from src.app.entities.trasaction import Transaction
-from src.app.enums.transaction_type_enum import TransactionTypeEnum
+from ..entities.user import User
+from ..entities.trasaction import Transaction
+from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class User_repository:
     users: Dict[int, User]
