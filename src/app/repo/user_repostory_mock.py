@@ -7,7 +7,9 @@ class User_repository:
     users: Dict[int, User]
 
     def __init__(self):
-        self.users = {}
+        self.users = {
+            1: User(name="Vitor Soller", agency="0000", account="00000-0", current_balance=1000.0)
+        }
 
     def create_user(self, user: User) -> User:
         
