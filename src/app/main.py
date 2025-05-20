@@ -137,7 +137,9 @@
 from fastapi import FastAPI, HTTPException
 from mangum import Mangum
 
-from .enviroments_dev_bank import Environments
+from src.app.enviroments_dev_bank import Environments
+
+
 
 app = FastAPI()
 user_repo = Environments.get_user_repo()
