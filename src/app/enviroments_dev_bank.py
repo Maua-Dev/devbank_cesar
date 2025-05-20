@@ -3,9 +3,9 @@ import os
 
 from .errors.environment_errors import EnvironmentNotFound
 
-from src.app.repo.user_repostory_mock import User_repository
+from .repo.user_repostory_mock import User_repository
 
-from src.app.repo.transaction_repository_mock import Trasaction_repository
+from .repo.transaction_repository_mock import Trasaction_repository
 
 class STAGE(Enum):
     DOTENV = "DOTENV"
