@@ -20,9 +20,9 @@ transaction_repo = Environments.get_transaction_repo()
 in_use_id = 1
 
 @app.get("/")
-def get_user(user_id):
+def get_user(user_id= in_use_id):
 
-    user = user_repo.get_user(user_id= in_use_id)
+    user = user_repo.get_user(user_id)
     if user is None:
         raise HTTPException(status_code=404, detail="User Not found")
     
