@@ -154,7 +154,18 @@ def get_user():
         raise HTTPException(status_code=404, detail="User Not found")
     else:
         return user.to_dict()
-    
+
+@app.get("/history")
+def get_history():
+    history = transaction_repo.get_history()
+    if history is None:
+        return None
+    else:
+        return {
+            "transactions": [
+                transaction.to_dict() for transaction in history         
+            ]
+        }
 
 
 handler = Mangum(app, lifespan="off")
