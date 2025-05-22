@@ -161,7 +161,7 @@ def get_history():
     if history is None:
         return None
     else:
-        return history
+        return transaction_repo.transactions
 
 
 handler = Mangum(app, lifespan="off")
