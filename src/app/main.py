@@ -163,7 +163,7 @@ def get_history():
     else:
         return {
             "transactions": [
-                transaction.to_dict() for transaction in history         
+                transaction.to_dict() for transaction in transaction_repo.transactions         
             ]
         }
 
