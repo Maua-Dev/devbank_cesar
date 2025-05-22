@@ -161,11 +161,7 @@ def get_history():
     if history is None:
         return None
     else:
-        return {
-            "transactions": [
-                transaction.to_dict() for transaction in transaction_repo.transactions         
-            ]
-        }
+        return history
 
 
 handler = Mangum(app, lifespan="off")
