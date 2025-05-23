@@ -164,4 +164,34 @@ def get_history():
         return transaction_repo.transactions
 
 
+@app.post("/deposit")
+def deposit():
+    def __init__ (self):
+        self.transaction = {
+            2: 0,
+            5: 0,
+            10: 2,
+            20: 1, 
+            50: 2,
+            100: 0,
+            200: 3
+        }
+    def get_value(self, id: int):
+        return self.transaction.get(id, None)
+    value = get_value(2) * 2 + get_value(5) * 5 + get_value(10) * 10 + get_value(50) * 50 + get_value(100) * 100 + get_value(200) * 200
+
+    if value is None:
+        return None
+    elif value <0:
+        raise HTTPException(status_code=400, detail="Deposited value must be positive")
+    elif value >= 2*current_balance:
+        raise HTTPException(status_code=403, detail="Depósito suspeito")
+    else:
+        value = transaction_repo.value
+        user_repo.update_current_balance
+        current_balance = user_repo.current_balance
+        timestamp = transaction_repo.timestamp
+        return current_balance
+
+
 handler = Mangum(app, lifespan="off")
