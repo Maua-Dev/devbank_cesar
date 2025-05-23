@@ -139,7 +139,11 @@ from mangum import Mangum
 
 from .enviroments_dev_bank import Environments
 
+from ..app.entities.trasaction import Transaction
 
+from ..app.enums.transaction_type_enum import TransactionTypeEnum
+
+import time 
 
 app = FastAPI()
 user_repo = Environments.get_user_repo()()
@@ -165,33 +169,62 @@ def get_history():
 
 
 @app.post("/deposit")
-def deposit():
-    def __init__ (self):
-        self.transaction = {
-            2: 0,
-            5: 0,
-            10: 2,
-            20: 1, 
-            50: 2,
-            100: 0,
-            200: 3
-        }
-    def get_value(self, id: int):
-        return self.transaction.get(id, None)
-    value = get_value(2) * 2 + get_value(5) * 5 + get_value(10) * 10 + get_value(50) * 50 + get_value(100) * 100 + get_value(200) * 200
+def deposit(request: dict):
+
+    dois = request.get("2")
+    cinco = request.get("5")
+    dez = request.get("10")
+    vinte = request.get("20")
+    cinquenta = request.get("50")
+    cem = request.get("100")
+    duzentos = request.get("200")
+
+    value = dois * 2 + cinco * 5 + dez * 10 + vinte * 20 + cinquenta * 50 + cem * 100 + duzentos * 200
 
     if value is None:
         return None
     elif value <0:
         raise HTTPException(status_code=400, detail="Deposited value must be positive")
-    elif value >= 2*current_balance:
+    elif value >= 2*user_repo.current_balance:
         raise HTTPException(status_code=403, detail="Depósito suspeito")
     else:
-        value = transaction_repo.value
-        user_repo.update_current_balance
-        current_balance = user_repo.current_balance
-        timestamp = transaction_repo.timestamp
-        return current_balance
+        user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.DEPOSIT)
+        timestamp = time.time()
+        transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = float(value), current_balance = user_repo.current_balance, timestamp = float(timestamp))
+        transaction_repo.create_transaction(transaction)
+        return {
+            "current_balance": user_repo.current_balance,
+            "timestamp": timestamp
+        }
+    
+@app.post("/withdraw")
+def withdraw(request: dict):
+
+    dois = request.get("2")
+    cinco = request.get("5")
+    dez = request.get("10")
+    vinte = request.get("20")
+    cinquenta = request.get("50")
+    cem = request.get("100")
+    duzentos = request.get("200")
+
+    value = dois * 2 + cinco * 5 + dez * 10 + vinte * 20 + cinquenta * 50 + cem * 100 + duzentos * 200
+
+    if value is None:
+        return None
+    elif value <0:
+        raise HTTPException(status_code=400, detail="Withdrawn value must be positive")
+    elif value > user_repo.current_balance:
+        raise HTTPException(status_code=403, detail="Saldo insuficiente para a transação")
+    else:
+        user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.WITHDRAW)
+        timestamp = time.time()
+        transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current_balance = user_repo.current_balance, timestamp = float(timestamp))
+        transaction_repo.create_transaction(transaction)
+        return {
+            "current_balance": user_repo.current_balance,
+            "timestamp": timestamp
+        }
 
 
 handler = Mangum(app, lifespan="off")
