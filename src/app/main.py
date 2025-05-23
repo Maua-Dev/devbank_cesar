@@ -143,7 +143,7 @@ from ..app.entities.trasaction import Transaction
 
 from ..app.enums.transaction_type_enum import TransactionTypeEnum
 
-import time 
+from time import time 
 
 app = FastAPI()
 user_repo = Environments.get_user_repo()()
