@@ -11,12 +11,12 @@ class Trasaction_repository:
         ]
 
 
-    def create_transaction(self, all_transactions: List, transaction: Transaction):
+    def create_transaction(self, all_transactions: list, transaction: Transaction):
         all_transactions.append(transaction)
         return transaction
 
     def get_history(self) -> List[Transaction]:
-        return self.all_transactions
+        return self.all_transactions.values
 
 
 
