@@ -165,7 +165,7 @@ def get_history():
     if history is None:
         return None
     else:
-        return transaction_repo.transactions
+        return {transaction_repo.all_transactions}
 
 
 @app.post("/deposit")
