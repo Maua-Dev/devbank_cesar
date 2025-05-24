@@ -210,20 +210,21 @@ def withdraw(request: dict):
     duzentos = request.get("200")
 
     value = dois * 2 + cinco * 5 + dez * 10 + vinte * 20 + cinquenta * 50 + cem * 100 + duzentos * 200
+    user = user_repo.get_user(in_use_id)
 
     if value is None:
         return None
     elif value <0:
         raise HTTPException(status_code=400, detail="Withdrawn value must be positive")
-    elif value > user_repo.current_balance:
+    elif value > user.current_balance:
         raise HTTPException(status_code=403, detail="Saldo insuficiente para a transação")
     else:
-        user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.WITHDRAW)
+        current_user_balance = user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.WITHDRAW)
         timestamp = time.time()
-        transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current_balance = user_repo.current_balance, timestamp = float(timestamp))
+        transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current__balance = current_user_balance, timestamp = float(timestamp))
         transaction_repo.create_transaction(transaction)
         return {
-            "current_balance": user_repo.current_balance,
+            "current_balance": current_user_balance,
             "timestamp": timestamp
         }
 
