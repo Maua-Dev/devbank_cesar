@@ -14,7 +14,7 @@ class Trasaction_repository:
         }
     
     def create_transaction(self, transaction: Transaction):
-        self.transactions[len(self.transactions.values) + 1] = transaction
+        self.transactions[len(self.transactions) + 1] = transaction
         return transaction
 
     def get_history(self) -> List[Transaction]:

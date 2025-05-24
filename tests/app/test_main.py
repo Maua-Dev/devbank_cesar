@@ -1,15 +1,26 @@
-# from fastapi.exceptions import HTTPException
-# import pytest
-# from src.app.entities.item import Item
-# from src.app.enums.item_type_enum import ItemTypeEnum
-# from src.app.main import get_all_items, get_item, create_item, delete_item, update_item
-# from src.app.repo.item_repository_mock import ItemRepositoryMock
+from fastapi.exceptions import HTTPException
+import pytest
 
-# class Test_Main:
-#     def test_get_all_items(self):
-#         repo = ItemRepositoryMock()
-#         response = get_all_items()
-#         assert all([item_expect.to_dict() == item for item_expect, item in zip(repo.items.values(), response.get("items"))]) 
+from src.app.main import deposit
+from src.app.repo.transaction_repository_mock import Trasaction_repository
+
+
+class Test_Main:
+    def test_deposit(self):
+        repo = Trasaction_repository()
+        request = {
+        "2": 1,
+        "5": 2,
+        "10": 3,
+        "20": 4,
+        "50": 5 ,
+        "100": 6,
+        "200": 0
+        }
+        response = deposit(request)
+        assert response['current_balance'] == 1972.0
+        assert type(response['timestamp']) == float
+        
         
 #     def test_get_item(self):
 #         repo = ItemRepositoryMock()
