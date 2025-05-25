@@ -166,7 +166,6 @@ def get_history():
         "all_transactions": [transaction.to_dict() for transaction in history]
     }
 
-
 @app.post("/deposit")
 def deposit(request: dict):
 
@@ -179,7 +178,7 @@ def deposit(request: dict):
     duzentos = request.get("200")
 
     value = dois * 2 + cinco * 5 + dez * 10 + vinte * 20 + cinquenta * 50 + cem * 100 + duzentos * 200
-    user = user_repo.get_user
+    user = user_repo.get_user(in_use_id)
 
     if value is None:
         return None
@@ -190,7 +189,7 @@ def deposit(request: dict):
     else:
         current_user_balance = user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.DEPOSIT)
         timestamp = time()
-        transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = float(value), current_balance = current_user_balance, timestamp = float(timestamp))
+        transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = float(value), current_balance = float(current_user_balance), timestamp = float(timestamp))
         transaction_repo.create_transaction(transaction)
         return {
             "current_balance": current_user_balance,
@@ -220,8 +219,8 @@ def withdraw(request: dict):
     else:
         current_user_balance = user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.WITHDRAW)
         timestamp = time()
-        transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current__balance = current_user_balance, timestamp = float(timestamp))
-        transaction_repo.create_transaction(transaction_repo.all_transactions, transaction)
+        transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current_balance = float(current_user_balance), timestamp = float(timestamp))
+        transaction_repo.create_transaction(transaction)
         return {
             "current_balance": current_user_balance,
             "timestamp": timestamp
