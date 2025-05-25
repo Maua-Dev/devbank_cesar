@@ -162,10 +162,9 @@ def get_user():
 @app.get("/history")
 def get_history():
     history = transaction_repo.get_history()
-    if history is None:
-        return None
-    else:
-        return transaction_repo.all_transactions
+    return {
+        "all_transactions": [transaction.to_dict() for transaction in history]
+    }
 
 
 @app.post("/deposit")
@@ -180,20 +179,21 @@ def deposit(request: dict):
     duzentos = request.get("200")
 
     value = dois * 2 + cinco * 5 + dez * 10 + vinte * 20 + cinquenta * 50 + cem * 100 + duzentos * 200
+    user = user_repo.get_user
 
     if value is None:
         return None
     elif value <0:
         raise HTTPException(status_code=400, detail="Deposited value must be positive")
-    elif value >= 2*user_repo.current_balance:
+    elif value >= 2*user.current_balance:
         raise HTTPException(status_code=403, detail="Depósito suspeito")
     else:
-        user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.DEPOSIT)
+        current_user_balance = user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.DEPOSIT)
         timestamp = time()
-        transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = float(value), current_balance = user_repo.current_balance, timestamp = float(timestamp))
+        transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = float(value), current_balance = current_user_balance, timestamp = float(timestamp))
         transaction_repo.create_transaction(transaction)
         return {
-            "current_balance": user_repo.current_balance,
+            "current_balance": current_user_balance,
             "timestamp": timestamp
         }
     

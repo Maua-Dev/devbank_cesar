@@ -16,4 +16,4 @@ class Trasaction_repository:
         return transaction
 
     def get_history(self) -> List[Transaction]:
-        return self.transactions.values()
+        return self.all_transactions.values()
