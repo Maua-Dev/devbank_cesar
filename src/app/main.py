@@ -220,7 +220,7 @@ def withdraw(request: dict):
         raise HTTPException(status_code=403, detail="Saldo insuficiente para a transação")
     else:
         current_user_balance = user_repo.update_current_balance(in_use_id,value,TransactionTypeEnum.WITHDRAW)
-        timestamp = time.time()
+        timestamp = time()
         transaction = Transaction(transaction_type = TransactionTypeEnum.WITHDRAW, value = float(value), current__balance = current_user_balance, timestamp = float(timestamp))
         transaction_repo.create_transaction(transaction_repo.all_transactions, transaction)
         return {
