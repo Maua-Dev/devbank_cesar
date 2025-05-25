@@ -25,4 +25,3 @@ class User_repository:
             user.current_balance = user.current_balance + value
         if transaction_type == TransactionTypeEnum("WITHDRAW"):
             user.current_balance = user.current_balance - value
-        return user.current_balance
