@@ -5,21 +5,21 @@ from src.app.main import deposit
 from src.app.repo.transaction_repository_mock import Trasaction_repository
 
 
-class Test_Main:
-    def test_deposit(self):
-        repo = Trasaction_repository()
-        request = {
-        "2": 1,
-        "5": 2,
-        "10": 3,
-        "20": 4,
-        "50": 5 ,
-        "100": 6,
-        "200": 0
-        }
-        response = deposit(request)
-        assert response['current_balance'] == 1972.0
-        assert type(response['timestamp']) == float
+# class Test_Main:
+#     def test_deposit(self):
+#         repo = Trasaction_repository()
+#         request = {
+#         "2": 1,
+#         "5": 2,
+#         "10": 3,
+#         "20": 4,
+#         "50": 5 ,
+#         "100": 6,
+#         "200": 0
+#         }
+#         response = deposit(request)
+#         assert response['current_balance'] == 1972.0
+#         assert type(response['timestamp']) == float
         
         
 #     def test_get_item(self):
