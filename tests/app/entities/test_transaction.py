@@ -13,7 +13,7 @@ class Test_Transaction:
 
     def test_transaction_dict(self):
         transaction = Transaction(transaction_type = TransactionTypeEnum.DEPOSIT, value = 1.0, timestamp = 1.0, current_balance = 2000.0)
-        assert transaction.to_dict() == {'transaction_type':TransactionTypeEnum.DEPOSIT, 'value': 1.0, 'timestamp': 1.0, 'current_balance': 2000.0}
+        assert transaction.to_dict() == {'type':TransactionTypeEnum.DEPOSIT, 'value': 1.0, 'timestamp': 1.0, 'current_balance': 2000.0}
         
     def test_transaction_type_is_none(self):
         with pytest.raises(ParamNotValidated):

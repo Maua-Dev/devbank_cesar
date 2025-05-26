@@ -69,7 +69,7 @@ class Transaction:
 
     def to_dict(self):
         return {
-            "transaction_type": self.transaction_type,
+            "type": self.transaction_type,
             "value": self.value,
             "timestamp": self.timestamp,
             "current_balance": self.current_balance
@@ -79,4 +79,4 @@ class Transaction:
         return self.transaction_type == other.transaction_type and self.value == other.value and self.timestamp == other.timestamp and self.current_balance == other.current_balance
     
     def __repr__(self):
-        return f"Transaction(transaction_type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, current_balance={self.current_balance})"
+        return f"Transaction(type={self.transaction_type}, value={self.value}, timestamp={self.timestamp}, current_balance={self.current_balance})"
