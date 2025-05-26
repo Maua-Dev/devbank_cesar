@@ -26,4 +26,3 @@ class User_repository_test:
         value = 200.0
         current_balance = repo.update_current_balance(id= id, value=value, transaction_type= transaction_type)
         assert current_balance == 800.0
-    # def test_update_current_balance(id, transaction_type, value):

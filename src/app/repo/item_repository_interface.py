@@ -45,5 +45,3 @@ class IItemRepository(ABC):
         If the item does not exist, returns None
         '''
         pass
-    
-    
