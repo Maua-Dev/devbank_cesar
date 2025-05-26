@@ -21,8 +21,8 @@ class User_repository:
     
     def update_current_balance(self, user_id: int, value: float, transaction_type):
         user = self.get_user(user_id)
-        if transaction_type == TransactionTypeEnum("DEPOSIT"):
+        if transaction_type == TransactionTypeEnum("deposit"):
             user.current_balance = user.current_balance + value
-        if transaction_type == TransactionTypeEnum("WITHDRAW"):
+        if transaction_type == TransactionTypeEnum("withdraw"):
             user.current_balance = user.current_balance - value
         return user.current_balance
